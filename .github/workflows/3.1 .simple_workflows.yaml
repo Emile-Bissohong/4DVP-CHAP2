@@ -1,0 +1,26 @@
+name: Player Info Workflow
+on:
+  workflow_dispatch:
+    inputs:
+      username:
+        description: 'Username of the player'
+        required: true
+      level:
+        description: 'Level of the player'
+        required: true
+      class:
+        description: 'Class of the player'
+        required: true
+        default: 'jedi'
+        options:
+          - 'jedi'
+          - 'sith'
+          - 'rebel'
+jobs:
+  player_infos:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Player Info
+        uses: actions/hello-world-docker-action@v1
+        with:
+          who-to-greet: 'Le joueur ${{ github.event.inputs.username }} est de niveau ${{ github.event.inputs.level }} et joue un ${{ github.event.inputs.class }}.'
